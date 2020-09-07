@@ -3,18 +3,43 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/express": "^4.17.8",
+    "axios": "^0.19.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "concurrently": "^5.2.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "memory-cache": "^0.2.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "sequelize": "^6.3.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node dist",
+    "start:server": "nodemon server/index.js --exec babel-node",
+    "start:client": "NODE_PATH=src react-scripts start",
+    "test": "yarn test:server && yarn test:client",
+    "test:server": "jest --config server/jest.config.js",
+    "test:client": "NODE_PATH=src react-scripts test --env=jest-environment-jsdom-sixteen",
+    "build": "yarn build:server && yarn build:client",
+    "build:server": "BABEL_ENV=production babel server --out-dir dist",
+    "build:client": "NODE_PATH=src react-scripts build",
+    "dev": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
+    "lint": "eslint",
+    "format": "prettier --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +55,40 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "src/*"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-plugin-inline-json-import": "^0.3.2",
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-better-styled-components": "^1.1.2",
+    "eslint-plugin-react": "^7.20.3",
+    "husky": "^4.2.5",
+    "jest": "24.9.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "precise-commits": "^1.0.2",
+    "prettier": "2.0.5",
+    "pretty-quick": "^2.0.1",
+    "supertest": "^4.0.2",
+    "typescript": "^4.0.2"
+  },
+  "engines": {
+    "yarn": ">=1.0.0 <2.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format . && git add . && pretty-quick --staged",
+      "pre-push": "yarn lint ."
+    }
+  },
+  "proxy": "http://localhost:1234"
 }

@@ -1,0 +1,5 @@
+{
+  "week": "SELECT players.name, (SUM(%TABLE%.stat)) AS stat FROM `%TABLE%` INNER JOIN players ON players.id = %TABLE%.player_id  WHERE stat_name=? AND week=? AND year=? GROUP BY name ORDER BY stat DESC LIMIT 100",
+  "month": "SELECT players.name, (SUM(%TABLE%.stat)) AS stat FROM `%TABLE%` INNER JOIN players ON players.id = %TABLE%.player_id  WHERE stat_name=? AND month=? AND year=? GROUP BY name ORDER BY stat DESC LIMIT 100",
+  "all": "SELECT players.name, %TABLE%.stat FROM `%TABLE%` INNER JOIN players ON players.id = %TABLE%.player_id  WHERE stat_name=? AND week=0 AND month=0 AND year=0 ORDER BY stat DESC LIMIT 100"
+}
