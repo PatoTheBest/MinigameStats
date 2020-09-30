@@ -1,11 +1,16 @@
 import { db } from "../config";
 import mysql from "mysql2";
 
-var connection;
+var connectionPool;
 
 const connectToDatabase = async () => {
-  connection = mysql.createConnection(db);
-  await connection.connect();
+  connectionPool = await mysql.createPool(db);
 };
 
-export { connectToDatabase, connection };
+const getConnection = (callback) => {
+  connectionPool.getConnection((err, conn) => {
+    callback(err, conn);
+  });
+};
+
+export { connectToDatabase, getConnection };

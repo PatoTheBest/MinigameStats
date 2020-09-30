@@ -1,5 +1,5 @@
 import { Router as router } from "express";
-import { connection } from "../../db";
+import { getConnection } from "../../db";
 import { cache } from "../../db/cache.js";
 import tables from "../../db/tables.json";
 import queries from "./leaderboard-queries.json";
@@ -32,12 +32,19 @@ leaderboard.get(
     }
 
     let query = queries.week.replace(/%TABLE%/gi, statTable);
-    connection.query(query, [stat, week, year], (error, results, fields) => {
-      if (error) {
-        next(error);
+    getConnection((err, conn) => {
+      if (err) {
+        next(err);
       } else {
-        return res.send({ error: false, message: results });
+        conn.query(query, [stat, week, year], (error, results, fields) => {
+          if (error) {
+            next(error);
+          } else {
+            return res.send(results);
+          }
+        });
       }
+      conn.release();
     });
   }
 );
@@ -68,12 +75,19 @@ leaderboard.get(
     }
 
     let query = queries.month.replace(/%TABLE%/gi, statTable);
-    connection.query(query, [stat, month, year], (error, results, fields) => {
-      if (error) {
-        next(error);
+    getConnection((err, conn) => {
+      if (err) {
+        next(err);
       } else {
-        return res.send({ error: false, message: results });
+        conn.query(query, [stat, month, year], (error, results, fields) => {
+          if (error) {
+            next(error);
+          } else {
+            return res.send(results);
+          }
+        });
       }
+      conn.release();
     });
   }
 );
@@ -101,12 +115,19 @@ leaderboard.get("/all/:game/:stat/", cache(10), async (req, res, next) => {
   }
 
   let query = queries.all.replace(/%TABLE%/gi, statTable);
-  connection.query(query, [stat], (error, results, fields) => {
-    if (error) {
-      next(error);
+  getConnection((err, conn) => {
+    if (err) {
+      next(err);
     } else {
-      return res.send({ error: false, message: results });
+      conn.query(query, [stat], (error, results, fields) => {
+        if (error) {
+          next(error);
+        } else {
+          return res.send(results);
+        }
+      });
     }
+    conn.release();
   });
 });
 

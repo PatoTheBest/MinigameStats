@@ -1,0 +1,92 @@
+{
+  "skywars": [
+    {
+      "name": "kills",
+      "translation": "Bajas Total"
+    },
+    {
+      "name": "wins",
+      "translation": "Ganadas Total"
+    },
+    {
+      "name": "loses",
+      "translation": "Perdidas Total"
+    },
+    {
+      "name": "deaths",
+      "translation": "Muertes Total"
+    },
+    {
+      "name": "skills",
+      "translation": "Bajas Solo"
+    },
+    {
+      "name": "swins",
+      "translation": "Ganadas Solo"
+    },
+    {
+      "name": "sloses",
+      "translation": "Perdidas Solo"
+    },
+    {
+      "name": "sdeaths",
+      "translation": "Muertes Solo"
+    },
+    {
+      "name": "tkills",
+      "translation": "Bajas Team"
+    },
+    {
+      "name": "twins",
+      "translation": "Ganadas Team"
+    },
+    {
+      "name": "tloses",
+      "translation": "Perdidas Team"
+    },
+    {
+      "name": "tdeaths",
+      "translation": "Muertes Team"
+    }
+  ],
+  "hungergames": [
+    {
+      "name": "kills",
+      "translation": "Bajas"
+    },
+    {
+      "name": "wins",
+      "translation": "Ganadas"
+    },
+    {
+      "name": "loses",
+      "translation": "Perdidas"
+    },
+    {
+      "name": "deaths",
+      "translation": "Muertes"
+    }
+  ],
+  "thetowers": [
+    {
+      "name": "kills",
+      "translation": "Bajas"
+    },
+    {
+      "name": "wins",
+      "translation": "Ganadas"
+    },
+    {
+      "name": "loses",
+      "translation": "Perdidas"
+    },
+    {
+      "name": "deaths",
+      "translation": "Muertes"
+    },
+    {
+      "name": "scored_points",
+      "translation": "Puntos Anotados"
+    }
+  ]
+}

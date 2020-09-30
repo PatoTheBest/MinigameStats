@@ -4,6 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 const app = express();
+const buildPath = join(`${__dirname}/../build`);
 
 app.use(helmet());
 app.use(morgan("common"));
@@ -27,4 +28,9 @@ app.use((error, req, res, next) => {
   });
 });
 
+app.use(express.static(buildPath));
+
+app.get("*", (req, res) => {
+  res.sendFile(`${buildPath}/index.html`);
+});
 export default app;
