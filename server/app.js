@@ -2,6 +2,7 @@ import api from "./api";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import { join } from "path";
 
 const app = express();
 const buildPath = join(`${__dirname}/../build`);
